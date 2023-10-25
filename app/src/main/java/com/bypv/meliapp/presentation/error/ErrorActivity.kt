@@ -35,6 +35,7 @@ class ErrorActivity : AppCompatActivity(){
     }
 
     private fun setView(errorType: TypeError) {
+        Log.w("ErrorActivity", "ErrorType: $errorType")
         when (errorType) {
             TypeError.NO_INTERNET_ERROR -> {
                 binding.errorImage.setImageResource(R.drawable.no_internet)

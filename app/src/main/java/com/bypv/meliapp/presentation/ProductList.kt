@@ -1,9 +1,12 @@
 package com.bypv.meliapp.presentation
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
@@ -23,29 +26,34 @@ class ProductList : AppCompatActivity(), androidx.appcompat.widget.SearchView.On
 
     private val binding: ActivityProductListBinding by lazy { ActivityProductListBinding.inflate(layoutInflater) }
     private val viewModel: ProductListViewModel by viewModels { ProductViewModelFactory() }
+    private lateinit var productAdapter: ProductListAdapter
+    private var lastQuery: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.topBarId.svProductFilter.setOnQueryTextListener(this)
         setContentView(binding.root)
         setupSearchFilter(binding)
+        setupRecyclerView()
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.state.collect() { state ->
                     when (state) {
                         is Resource.Loading -> {
-                            binding.shimmerLayout.visibility = View.VISIBLE
                         }
 
                         is Resource.Success -> {
-                            binding.shimmerLayout.visibility = View.GONE
-                            binding.rvProducts.visibility = View.VISIBLE
-                            binding.rvProducts.adapter = ProductListAdapter(state.data.results, ::onItemClick)
+                            binding.apply {
+                                shimmerLayout.visibility = View.GONE
+                                shimmerLayout.stopShimmer()
+                                productAdapter.updateData(state.data.results)
+
+                            }
                         }
 
                         is Resource.Failure -> {
-                            if (isNetworkAvailable()) {
+                            if (!isNetworkAvailable()) {
                                 callErrorActivity(TypeError.NO_INTERNET_ERROR)
                             } else {
                                 callErrorActivity(TypeError.DEFAULT_ERROR_VIEW)
@@ -59,10 +67,16 @@ class ProductList : AppCompatActivity(), androidx.appcompat.widget.SearchView.On
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         val input = !query.isNullOrEmpty()
+
         if (input) {
+            binding.shimmerLayout.visibility = View.VISIBLE
+            binding.shimmerLayout.startShimmer()
+            productAdapter.clearData()
+
             query?.let {
-                (viewModel.searchCategoryId(it))
+                viewModel.searchCategoryId(it)
             }
+            hideKeyboard()
         }
         return input
     }
@@ -75,5 +89,10 @@ class ProductList : AppCompatActivity(), androidx.appcompat.widget.SearchView.On
         val intentToProductDetailActivity = Intent(this, ProductListDetail::class.java)
             .putExtra(Constants.PRODUCT_ITEM, productItem)
         startActivity(intentToProductDetailActivity)
+    }
+
+    private fun setupRecyclerView() {
+        productAdapter = ProductListAdapter(emptyList(), ::onItemClick)
+        binding.rvProducts.adapter = productAdapter
     }
 }
