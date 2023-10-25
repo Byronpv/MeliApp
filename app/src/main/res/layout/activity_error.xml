@@ -41,7 +41,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:gravity="center"
-        android:text="@string/app_error_somethingsubtitle"
+        android:text="@string/app_error_something_subtitle"
         android:textColor="@color/gray_550"
         android:textSize="@dimen/text_size_18"
         app:layout_constraintEnd_toEndOf="@+id/error_title"

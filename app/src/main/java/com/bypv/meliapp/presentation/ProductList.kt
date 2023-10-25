@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -34,11 +35,12 @@ class ProductList : AppCompatActivity(), androidx.appcompat.widget.SearchView.On
                 viewModel.state.collect() { state ->
                     when (state) {
                         is Resource.Loading -> {
-                            binding.progressBar.visibility = View.VISIBLE
+                            binding.shimmerLayout.visibility = View.VISIBLE
                         }
 
                         is Resource.Success -> {
-                            binding.progressBar.visibility = View.GONE
+                            binding.shimmerLayout.visibility = View.GONE
+                            binding.rvProducts.visibility = View.VISIBLE
                             binding.rvProducts.adapter = ProductListAdapter(state.data.results, ::onItemClick)
                         }
 

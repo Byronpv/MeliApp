@@ -41,8 +41,11 @@ class ErrorActivity : AppCompatActivity(){
                 binding.errorTitle.text = getString(R.string.app_error_internet_failed)
                 binding.errorSubtitle.text = getString(R.string.app_error_internet_failed_subtitle)
             }
-
-            else -> {}
+            TypeError.DEFAULT_ERROR_VIEW -> {
+                binding.errorImage.setImageResource(R.drawable.app_error_default)
+                binding.errorTitle.text = getString(R.string.app_error_something)
+                binding.errorSubtitle.text = getString(R.string.app_error_something_subtitle)
+            }
         }
     }
 
