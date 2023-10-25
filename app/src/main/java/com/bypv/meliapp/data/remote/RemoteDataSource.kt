@@ -17,7 +17,6 @@ class RemoteDataSource {
     }
 
     suspend fun getPicturesProduct(productId: String): ProductItemDescriptionModel {
-        val x = service.getPictures(productId)
         return service.getPictures(productId)
     }
 }
