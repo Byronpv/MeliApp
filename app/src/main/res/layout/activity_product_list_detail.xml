@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.ProductListDetail">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="118dp"
+                android:background="@color/yellow_ml_500"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivCarDetailRS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/navegacion_carrito_idle_24"
+                app:layout_constraintEnd_toEndOf="@+id/view"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivSearchDetailRS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/buscar_16"
+                app:layout_constraintBottom_toBottomOf="@+id/ivCarDetailRS"
+                app:layout_constraintEnd_toStartOf="@+id/ivCarDetailRS"
+                app:layout_constraintTop_toTopOf="@+id/ivCarDetailRS" />
+
+            <ImageView
+                android:id="@+id/buttonFavoriteDetailRS"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/favorite_24"
+                app:tint="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/ivSearchDetailRS"
+                app:layout_constraintEnd_toStartOf="@+id/ivSearchDetailRS"
+                app:layout_constraintTop_toTopOf="@+id/ivSearchDetailRS"
+                />
+
+
+            <ImageView
+                android:id="@+id/btnBackDetail"
+                android:layout_width="29dp"
+                android:layout_height="29dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="54dp"
+                android:src="@drawable/arrow_left"
+                app:layout_constraintBottom_toBottomOf="@+id/view"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivLocationDetail"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="11dp"
+                android:src="@drawable/app_ic_ubication"
+                app:layout_constraintBottom_toBottomOf="@+id/view"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+            <TextView
+                android:id="@+id/tvUserDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="18dp"
+                android:layout_marginStart="6dp"
+                android:text="@string/app_direction_home"
+                app:layout_constraintStart_toEndOf="@+id/ivLocationDetail"
+                app:layout_constraintTop_toTopOf="@+id/ivLocationDetail" />
+
+
+            <TextView
+                android:id="@+id/tvTitleConditions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:textColor= "@color/gray_550"
+                android:textSize="@dimen/text_size_13"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view"
+                tools:text="Nuevo | 50 vendidos" />
+
+            <TextView
+                android:id="@+id/tvTitleDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="16dp"
+                android:textSize="@dimen/text_size_14"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvTitleConditions"
+                tools:text="Volkswagen Fox 1.6 Connect" />
+
+
+            <ImageView
+                android:id="@+id/ivDetail"
+                android:layout_width="match_parent"
+                android:layout_height="275dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvTitleDetail"
+                tools:src="@drawable/ic_launcher_foreground"/>
+
+            <TextView
+                android:id="@+id/tvPriceDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:textSize="@dimen/text_size_36"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivDetail"
+                tools:text="$ 360.000.000 COP" />
+
+
+            <Button
+                android:id="@+id/addToCart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="20dp"
+                android:textSize="@dimen/text_size_15"
+                android:text="@string/add_to_cart"
+                android:backgroundTint="@color/blue_ml_500"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvPriceDetail"
+                 />
+
+            <LinearLayout
+                android:id="@+id/containerFavAndShare"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addToCart"
+                android:layout_marginTop="34dp">
+
+                <ImageView
+                    android:id="@+id/ivFavoritesDetailRS"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/favorite_24"
+                    android:backgroundTint="@color/blue_ml_500"
+                    tools:ignore="ImageContrastCheck,UseAppTint" />
+
+                <TextView
+                    android:id="@+id/tvAddFavoritesDetailRS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/app_addFavorites"
+                    android:textColor="@color/blue_ml_500"
+                    android:textSize="@dimen/text_size_14"
+                    android:paddingEnd="16dp"/>
+
+                <ImageView
+                    android:id="@+id/ivShareDetailRS"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/share_16"
+                    android:tint="@color/blue_ml_500"
+                    tools:ignore="ImageContrastCheck,UseAppTint" />
+
+                <TextView
+                    android:id="@+id/tvShareDetailRS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/app_shared"
+                    android:textColor="@color/blue_ml_500"
+                    android:textSize="@dimen/text_size_14" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvDescriptionTitleDetailRS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="46dp"
+                android:textSize="@dimen/text_size_18"
+                android:text="@string/app_description"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/containerFavAndShare"/>
+
+            <TextView
+                android:id="@+id/tvDescriptionDetailRS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvDescriptionTitleDetailRS"
+                tools:text="@tools:sample/lorem/random" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

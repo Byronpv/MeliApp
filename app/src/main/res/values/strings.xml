@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">MeliApp</string>
+    <string name="new_product">Nuevo</string>
+    <string name="used_product">Usado</string>
+    <string name="active">Activo\n</string>
+    <string name="inactive">Inactivo</string>
+    <string name="app_direction_home"><![CDATA[Enviar a Australia - Calle Wallaby 42, Sidney >]]></string>
+    <string name="app_search_in_meli">Buscar en Mercado Libre</string>
+    <string name="app_delete_favorite">Eliminar</string>
+    <string name="app_addFavorites">Agregar a favoritos\n</string>
+    <string name="app_shared">Compartir</string>
+    <string name="app_description">Descripción</string>
+    <string name="add_to_cart">Agregar al carrito</string>
+    <string name="quotes">en 12x $ </string>
+    <string name="price">"$ "</string>
+    <string name="soldBy">"por "</string>
+    <string name="app_something_wrong">SOMETHING_WRONG_ERROR</string>
+    <string name="app_error_something">Algo salió mal</string>
+    <string name="app_error_somethingsubtitle">Estamos trabajando para solucionarlo</string>
+    <string name="reload">Reintentar</string>
+    <string name="app_error_internet_failed">¡Parece que no hay internet!</string>
+    <string name="app_error_internet_failed_subtitle">revisa tu conexión para seguir navegando</string>
+</resources>
