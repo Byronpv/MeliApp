@@ -1,17 +1,20 @@
 package com.bypv.meliapp.presentation
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import android.widget.EditText
 import androidx.core.content.ContextCompat
 import androidx.viewbinding.ViewBinding
 import com.bypv.meliapp.R
+import com.bypv.meliapp.core.Constants
 import com.bypv.meliapp.presentation.error.ErrorActivity
 import com.bypv.meliapp.presentation.error.TypeError
 
 fun Activity.callErrorActivity(typeError: TypeError) {
     val intent = Intent(this, ErrorActivity::class.java)
-    intent.putExtra("typeError", typeError)
+    intent.putExtra(Constants.ERROR, typeError)
     startActivity(intent)
 }
 
@@ -28,4 +31,11 @@ fun <T : ViewBinding> Activity.setupSearchFilter(binding: T) {
             clearFocus()
         }
     }
+}
+
+fun Activity.isNetworkAvailable(): Boolean {
+    val connectivityManager =
+        getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val activeNetworkInfo = connectivityManager.activeNetworkInfo
+    return activeNetworkInfo != null && activeNetworkInfo.isConnected
 }

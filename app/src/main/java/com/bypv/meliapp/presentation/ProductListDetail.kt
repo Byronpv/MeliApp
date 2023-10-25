@@ -1,13 +1,15 @@
 package com.bypv.meliapp.presentation
 
 import android.annotation.SuppressLint
+import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.bypv.meliapp.R
 import com.bypv.meliapp.core.Constants
 import com.bypv.meliapp.core.Resource
 import com.bypv.meliapp.data.model.ProductModel
@@ -58,16 +60,26 @@ class ProductListDetail : AppCompatActivity() {
                 viewModel.state.collect { state ->
                     when (state) {
                         is Resource.Loading -> {
+                            binding.progressBar.visibility = View.VISIBLE
                         }
 
                         is Resource.Success -> {
                             with(binding) {
+                                val thumbnailSecurity = productItems!!.thumbnail.replaceFirst("http", "https")
+                                progressBar.visibility = View.GONE
+                                Picasso.with(root.context)
+                                    .load(thumbnailSecurity)
+                                    .into(ivDetail)
                                 tvDescriptionDetailRS.text = state.data.plain_text
                             }
                         }
 
                         is Resource.Failure -> {
-                            callErrorActivity(TypeError.DEFAULT_ERROR_VIEW)
+                            if (isNetworkAvailable()){
+                                callErrorActivity(TypeError.NO_INTERNET_ERROR)
+                            } else {
+                                callErrorActivity(TypeError.DEFAULT_ERROR_VIEW)
+                            }
                         }
                     }
 

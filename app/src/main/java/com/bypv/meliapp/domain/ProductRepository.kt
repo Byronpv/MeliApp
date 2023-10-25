@@ -1,4 +1,4 @@
-package com.bypv.meliapp.data
+package com.bypv.meliapp.domain
 
 import com.bypv.meliapp.data.remote.RemoteDataSource
 

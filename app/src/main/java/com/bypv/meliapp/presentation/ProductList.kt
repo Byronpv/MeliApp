@@ -3,22 +3,16 @@ package com.bypv.meliapp.presentation
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.EditText
 import androidx.activity.viewModels
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.bypv.meliapp.R
 import com.bypv.meliapp.core.Constants
 import com.bypv.meliapp.core.Resource
 import com.bypv.meliapp.data.model.ProductModel
 import com.bypv.meliapp.databinding.ActivityProductListBinding
 import com.bypv.meliapp.presentation.adapter.ProductListAdapter
-import com.bypv.meliapp.presentation.error.ErrorActivity
 import com.bypv.meliapp.presentation.error.TypeError
 import com.bypv.meliapp.presentation.viewModels.ProductListViewModel
 import com.bypv.meliapp.presentation.viewModels.viewModelFactories.ProductViewModelFactory
@@ -49,7 +43,11 @@ class ProductList : AppCompatActivity(), androidx.appcompat.widget.SearchView.On
                         }
 
                         is Resource.Failure -> {
-                            callErrorActivity(TypeError.DEFAULT_ERROR_VIEW)
+                            if (isNetworkAvailable()) {
+                                callErrorActivity(TypeError.NO_INTERNET_ERROR)
+                            } else {
+                                callErrorActivity(TypeError.DEFAULT_ERROR_VIEW)
+                            }
                         }
                     }
                 }

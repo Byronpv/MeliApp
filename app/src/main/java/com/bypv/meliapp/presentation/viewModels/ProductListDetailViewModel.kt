@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bypv.meliapp.core.Resource
-import com.bypv.meliapp.data.ProductRepository
+import com.bypv.meliapp.domain.ProductRepository
 import com.bypv.meliapp.data.model.ProductItemDescriptionModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
