@@ -68,7 +68,10 @@ dependencies {
 
     implementation "androidx.activity:activity-ktx:1.7.1"
 
+    //MockK
+    testImplementation "io.mockk:mockk:1.13.8"
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }

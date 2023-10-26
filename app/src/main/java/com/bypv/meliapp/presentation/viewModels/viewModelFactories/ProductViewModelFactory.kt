@@ -2,6 +2,7 @@ package com.bypv.meliapp.presentation.viewModels.viewModelFactories
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.bypv.meliapp.core.AndroidLogger
 import com.bypv.meliapp.domain.ProductRepository
 import com.bypv.meliapp.data.remote.RemoteDataSource
 import com.bypv.meliapp.presentation.viewModels.ProductListViewModel
@@ -12,6 +13,7 @@ class ProductViewModelFactory : ViewModelProvider.Factory {
         val repository = ProductRepository(
             remoteDataSource = RemoteDataSource(),
         )
-        return ProductListViewModel(repository) as T
+        val logger = AndroidLogger()
+        return ProductListViewModel(repository, logger) as T
     }
 }
