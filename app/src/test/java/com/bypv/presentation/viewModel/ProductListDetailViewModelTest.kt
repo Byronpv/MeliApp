@@ -5,7 +5,6 @@ import com.bypv.meliapp.core.Logger
 import com.bypv.meliapp.core.Resource
 import com.bypv.meliapp.data.model.PicturesProductModel
 import com.bypv.meliapp.data.model.ProductItemDescriptionModel
-import com.bypv.meliapp.data.model.ProductResponse
 import com.bypv.meliapp.domain.ProductRepository
 import com.bypv.meliapp.presentation.viewModels.ProductListDetailViewModel
 import io.mockk.MockKAnnotations

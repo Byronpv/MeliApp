@@ -12,10 +12,10 @@ import java.util.Locale
 class ProductViewHolder(private val binding: ItemProductBinding) : RecyclerView.ViewHolder(binding.root) {
     @SuppressLint("SetTextI18n")
     fun bind(item: ProductModel, onItemClicked: (ProductModel) -> Unit) {
+        val format = NumberFormat.getCurrencyInstance(Locale.getDefault())
+        val currency: String = format.format(item.price.toDouble().toInt()).replace(".00", "")
+        val secureImageUrl = item.thumbnail.replaceFirst("http", "https")
         binding.apply {
-            val format = NumberFormat.getCurrencyInstance(Locale.getDefault())
-            val currency: String = format.format(item.price.toDouble().toInt()).replace(".00", "")
-            val secureImageUrl = item.thumbnail.replaceFirst("http", "https")
             Picasso.with(root.context).load(secureImageUrl).into(productImg)
             tvTitleProduct.text = item.title
             tvPrice.text = currency

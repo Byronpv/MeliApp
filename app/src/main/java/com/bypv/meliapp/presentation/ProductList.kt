@@ -20,17 +20,22 @@ import kotlinx.coroutines.launch
 
 class ProductList : AppCompatActivity(), androidx.appcompat.widget.SearchView.OnQueryTextListener {
 
-    private val binding: ActivityProductListBinding by lazy { ActivityProductListBinding.inflate(layoutInflater) }
-    private val viewModel: ProductListViewModel by viewModels { ProductViewModelFactory() }
-    private lateinit var productAdapter: ProductListAdapter
+    val binding: ActivityProductListBinding by lazy { ActivityProductListBinding.inflate(layoutInflater) }
+    val viewModel: ProductListViewModel by viewModels { ProductViewModelFactory() }
+    lateinit var productAdapter: ProductListAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.topBarId.svProductFilter.setOnQueryTextListener(this)
         setContentView(binding.root)
         setupSearchFilter(binding)
         setupRecyclerView()
+        setUpObserverForState()
 
+
+    }
+
+    fun setUpObserverForState() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.state.collect() { state ->
@@ -86,7 +91,7 @@ class ProductList : AppCompatActivity(), androidx.appcompat.widget.SearchView.On
         startActivity(intentToProductDetailActivity)
     }
 
-    private fun setupRecyclerView() {
+    fun setupRecyclerView() {
         productAdapter = ProductListAdapter(emptyList(), ::onItemClick)
         binding.rvProducts.adapter = productAdapter
     }

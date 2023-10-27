@@ -67,11 +67,19 @@ dependencies {
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
     implementation "androidx.activity:activity-ktx:1.7.1"
+    implementation 'androidx.test.ext:junit-ktx:1.1.5'
+
+    implementation 'org.robolectric:robolectric:4.8.1'
+
 
     //MockK
     testImplementation "io.mockk:mockk:1.13.8"
+    testImplementation "androidx.arch.core:core-testing:2.2.0"
     testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.robolectric:robolectric:4.8.1'
+
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
 }

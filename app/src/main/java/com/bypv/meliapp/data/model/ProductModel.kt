@@ -10,7 +10,6 @@ data class ProductModel(
     @SerializedName("thumbnail") val thumbnail: String,
     @SerializedName("permalink") val url: String,
     @SerializedName("condition") val conditionModel:String,
-    @SerializedName("address") val ubication: ProductAddressModel?,
     @SerializedName("currency_id") val currency: String?,
     @SerializedName("official_store_name") val storeName: String?,
 ) : Serializable
