@@ -31,8 +31,6 @@ class ProductList : AppCompatActivity(), androidx.appcompat.widget.SearchView.On
         setupSearchFilter(binding)
         setupRecyclerView()
         setUpObserverForState()
-
-
     }
 
     private fun setUpObserverForState() {
@@ -80,17 +78,23 @@ class ProductList : AppCompatActivity(), androidx.appcompat.widget.SearchView.On
         }
         return input
     }
-
     override fun onQueryTextChange(newText: String?): Boolean {
         return true
     }
 
+    /**
+     * Called when a product item is clicked. Starts the ProductListDetail activity with the selected product.
+     * @param productItem The selected product.
+     */
     private fun onItemClick(productItem: ProductModel) {
         val intentToProductDetailActivity = Intent(this, ProductListDetail::class.java)
             .putExtra(Constants.PRODUCT_ITEM, productItem)
         startActivity(intentToProductDetailActivity)
     }
 
+    /**
+     * Sets up the recycler view with the product adapter.
+     */
     private fun setupRecyclerView() {
         productAdapter = ProductListAdapter(emptyList(), ::onItemClick)
         binding.rvProducts.adapter = productAdapter

@@ -10,11 +10,21 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
+/**
+ * ViewModel class for the product list screen.
+ *
+ * @param repository The repository used to fetch the product data.
+ */
 class ProductListViewModel(private val repository: ProductRepository) : ViewModel() {
 
     private val _state = MutableStateFlow<Resource<ProductResponse>>(Resource.Loading())
     val state: StateFlow<Resource<ProductResponse>> = _state
 
+    /**
+     * Searches for products with the given category ID.
+     *
+     * @param categoryId The ID of the category to search for.
+     */
     fun searchCategoryId(categoryId: String) {
         viewModelScope.launch {
             try {

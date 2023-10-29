@@ -4,6 +4,9 @@ import com.bypv.meliapp.core.RetrofitClient
 import com.bypv.meliapp.data.model.ProductItemDescriptionModel
 import com.bypv.meliapp.data.model.ProductResponse
 
+/**
+ * This class is responsible for handling remote data sources for products.
+ */
 class RemoteDataSource {
 
     private val service = RetrofitClient.getRetrofit().create(ProductService::class.java)

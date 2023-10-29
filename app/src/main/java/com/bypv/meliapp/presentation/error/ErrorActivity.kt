@@ -9,6 +9,11 @@ import com.bypv.meliapp.core.Constants
 import com.bypv.meliapp.databinding.ActivityErrorBinding
 import com.bypv.meliapp.presentation.ProductList
 
+/**
+ * Activity that displays an error view with an image, title, subtitle and a "Try Again" button.
+ * The error view is set based on the error type received through the intent extras.
+ * The "Try Again" button restarts the ProductList activity.
+ */
 class ErrorActivity : AppCompatActivity() {
 
     private val binding: ActivityErrorBinding by lazy {
@@ -21,6 +26,10 @@ class ErrorActivity : AppCompatActivity() {
         initEventError()
     }
 
+    /**
+     * Sets up the error view by calling [initTryAgainBtn] and [setView].
+     * Catches any exceptions and logs the error message.
+     */
     private fun initEventError() {
         try {
             initTryAgainBtn()
@@ -32,6 +41,10 @@ class ErrorActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Sets the error view based on the [errorType] received through the intent extras.
+     * Updates the image, title and subtitle of the error view accordingly.
+     */
     private fun setView(errorType: TypeError) {
         when (errorType) {
             TypeError.NO_INTERNET_ERROR -> {
@@ -48,6 +61,9 @@ class ErrorActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Initializes the "Try Again" button and sets its click listener to restart the ProductList activity.
+     */
     private fun initTryAgainBtn() {
         binding.btnTryAgain.setOnClickListener {
             val intent = Intent(this, ProductList::class.java)

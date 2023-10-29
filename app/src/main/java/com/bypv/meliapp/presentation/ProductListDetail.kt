@@ -38,7 +38,7 @@ class ProductListDetail : AppCompatActivity() {
         productItems.let {
             getProductsItems()
             setUpObserverForState()
-        }.run { Log.e("ProductListDetail","Error al cargar los productos") }
+        }.run { Log.e("ProductListDetail", "Error al cargar los productos") }
     }
 
     private fun setUpObserverForState() {
@@ -74,6 +74,9 @@ class ProductListDetail : AppCompatActivity() {
         }
     }
 
+    /**
+     * The getProductsItems method sets up the UI with the product details.
+     */
     private fun getProductsItems() {
 
         productItems.let { productId ->
