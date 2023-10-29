@@ -3,16 +3,14 @@ package com.bypv.meliapp.presentation.viewModels
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bypv.meliapp.core.AndroidLogger
-import com.bypv.meliapp.core.Logger
 import com.bypv.meliapp.core.Resource
-import com.bypv.meliapp.domain.ProductRepository
 import com.bypv.meliapp.data.model.ProductItemDescriptionModel
+import com.bypv.meliapp.domain.ProductRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class ProductListDetailViewModel(private val repository: ProductRepository, private val logger: Logger): ViewModel() {
+class ProductListDetailViewModel(private val repository: ProductRepository): ViewModel() {
 
     private var _state = MutableStateFlow<Resource<ProductItemDescriptionModel>>(Resource.Loading())
     val state: StateFlow<Resource<ProductItemDescriptionModel>> = _state
@@ -24,7 +22,7 @@ class ProductListDetailViewModel(private val repository: ProductRepository, priv
             try {
                 _state.value = Resource.Success(repository.getDescriptionProduct(productId))
             } catch (e: Exception) {
-                logger.e("Error connection", "${e.message}")
+                Log.e("Error connection", "${e.message}")
                 _state.value = Resource.Failure(e)
             }
         }
@@ -35,7 +33,7 @@ class ProductListDetailViewModel(private val repository: ProductRepository, priv
             try {
                 _state.value = Resource.Success(repository.getPicturesProduct(productId))
             } catch (e: Exception) {
-                logger.e("Error connection", "${e.message}")
+                Log.e("Error connection", "${e.message}")
                 _state.value = Resource.Failure(e)
             }
         }

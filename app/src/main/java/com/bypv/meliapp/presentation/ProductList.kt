@@ -1,10 +1,10 @@
 package com.bypv.meliapp.presentation
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -20,11 +20,11 @@ import kotlinx.coroutines.launch
 
 class ProductList : AppCompatActivity(), androidx.appcompat.widget.SearchView.OnQueryTextListener {
 
-    val binding: ActivityProductListBinding by lazy { ActivityProductListBinding.inflate(layoutInflater) }
-    val viewModel: ProductListViewModel by viewModels { ProductViewModelFactory() }
+    private val binding: ActivityProductListBinding by lazy { ActivityProductListBinding.inflate(layoutInflater) }
+    private val viewModel: ProductListViewModel by viewModels { ProductViewModelFactory() }
     lateinit var productAdapter: ProductListAdapter
 
-    public override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.topBarId.svProductFilter.setOnQueryTextListener(this)
         setContentView(binding.root)
@@ -35,7 +35,7 @@ class ProductList : AppCompatActivity(), androidx.appcompat.widget.SearchView.On
 
     }
 
-    fun setUpObserverForState() {
+    private fun setUpObserverForState() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.state.collect() { state ->
@@ -91,7 +91,7 @@ class ProductList : AppCompatActivity(), androidx.appcompat.widget.SearchView.On
         startActivity(intentToProductDetailActivity)
     }
 
-    fun setupRecyclerView() {
+    private fun setupRecyclerView() {
         productAdapter = ProductListAdapter(emptyList(), ::onItemClick)
         binding.rvProducts.adapter = productAdapter
     }

@@ -1,7 +1,7 @@
 package com.bypv.meliapp.presentation
 
-import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
@@ -27,30 +27,21 @@ class ProductListDetail : AppCompatActivity() {
 
     private val viewModel: ProductListDetailViewModel by viewModels { ProductDetailViewModelFactory() }
 
-    var productItems: ProductModel? = null
+    private var productItems: ProductModel? = null
 
-    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        productItems = intent.getSerializableExtra(Constants.PRODUCT_ITEM) as ProductModel
+        productItems = intent.getSerializableExtra(Constants.PRODUCT_ITEM) as? ProductModel
 
+        productItems.let {
+            getProductsItems()
+            setUpObserverForState()
+        }.run { Log.e("ProductListDetail","Error al cargar los productos") }
+    }
 
-        productItems?.let { productId ->
-            binding.apply {
-                val format = NumberFormat.getCurrencyInstance(Locale.getDefault())
-                val currency: String = format.format(productItems!!.price.toDouble().toInt()).replace(".00", "")
-                viewModel.getDescription(productId.id)
-                tvTitleDetail.text = productItems!!.title
-                tvTitleConditions.text = productItems!!.conditionModel
-                tvPriceDetail.text = currency
-                btnBackDetail.setOnClickListener {
-                    onBackPressed()
-                }
-
-            }
-        }
+    private fun setUpObserverForState() {
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -79,6 +70,24 @@ class ProductListDetail : AppCompatActivity() {
                     }
 
                 }
+            }
+        }
+    }
+
+    private fun getProductsItems() {
+
+        productItems.let { productId ->
+            binding.apply {
+                val format = NumberFormat.getCurrencyInstance(Locale.getDefault())
+                val currency: String = format.format(productItems?.price?.toDouble()?.toInt() ?: 0).replace(".00", "")
+                productId?.id?.let { viewModel.getDescription(it) }
+                tvTitleDetail.text = productItems?.title ?: ""
+                tvTitleConditions.text = productItems?.conditionModel ?: ""
+                tvPriceDetail.text = currency
+                btnBackDetail.setOnClickListener {
+                    onBackPressed()
+                }
+
             }
         }
     }

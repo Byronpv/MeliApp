@@ -1,7 +1,6 @@
 package com.bypv.presentation.viewModel
 
 import android.util.Log
-import com.bypv.meliapp.core.Logger
 import com.bypv.meliapp.core.Resource
 import com.bypv.meliapp.data.model.ProductResponse
 import com.bypv.meliapp.domain.ProductRepository
@@ -10,8 +9,8 @@ import io.mockk.MockKAnnotations
 import io.mockk.clearAllMocks
 import io.mockk.coEvery
 import io.mockk.coVerify
+import io.mockk.every
 import io.mockk.impl.annotations.MockK
-import io.mockk.mockk
 import io.mockk.mockkStatic
 import io.mockk.unmockkAll
 import io.mockk.verify
@@ -27,8 +26,6 @@ class ProductListViewModelTest {
 
     @MockK
     private lateinit var repository: ProductRepository
-    @MockK
-    private lateinit var logger: Logger
 
     private lateinit var viewModel: ProductListViewModel
 
@@ -37,8 +34,7 @@ class ProductListViewModelTest {
         MockKAnnotations.init(this)
         mockkStatic(Log::class)
         Dispatchers.setMain(Dispatchers.Unconfined)
-        logger = mockk(relaxed = true)
-        viewModel = ProductListViewModel(repository,logger)
+        viewModel = ProductListViewModel(repository)
     }
 
     @After
@@ -66,11 +62,12 @@ class ProductListViewModelTest {
     fun `searchCategoryId should update state with Failure when repository call throws an exception`() = runBlocking {
         val categoryId = "MLA123"
         coEvery { repository.getProducts(categoryId) } throws  Exception("Failed")
+        every { Log.e(any(),any()) } returns 0
 
         viewModel.searchCategoryId(categoryId)
 
         assert(viewModel.state.value is Resource.Failure)
 
-        verify { logger.e(any(), any()) }
+        verify { Log.e(any(), any()) }
     }
 }

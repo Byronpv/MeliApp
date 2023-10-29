@@ -9,7 +9,7 @@ import com.bypv.meliapp.core.Constants
 import com.bypv.meliapp.databinding.ActivityErrorBinding
 import com.bypv.meliapp.presentation.ProductList
 
-class ErrorActivity : AppCompatActivity(){
+class ErrorActivity : AppCompatActivity() {
 
     private val binding: ActivityErrorBinding by lazy {
         ActivityErrorBinding.inflate(layoutInflater)
@@ -18,6 +18,10 @@ class ErrorActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        initEventError()
+    }
+
+    private fun initEventError() {
         try {
             initTryAgainBtn()
             val errorType =
@@ -29,13 +33,13 @@ class ErrorActivity : AppCompatActivity(){
     }
 
     private fun setView(errorType: TypeError) {
-        Log.w("ErrorActivity", "ErrorType: $errorType")
         when (errorType) {
             TypeError.NO_INTERNET_ERROR -> {
                 binding.errorImage.setImageResource(R.drawable.no_internet)
                 binding.errorTitle.text = getString(R.string.app_error_internet_failed)
                 binding.errorSubtitle.text = getString(R.string.app_error_internet_failed_subtitle)
             }
+
             TypeError.DEFAULT_ERROR_VIEW -> {
                 binding.errorImage.setImageResource(R.drawable.app_error_default)
                 binding.errorTitle.text = getString(R.string.app_error_something)
@@ -46,8 +50,9 @@ class ErrorActivity : AppCompatActivity(){
 
     private fun initTryAgainBtn() {
         binding.btnTryAgain.setOnClickListener {
-            val intent = Intent(this,ProductList::class.java)
+            val intent = Intent(this, ProductList::class.java)
             startActivity(intent)
+            finish()
         }
     }
 }
